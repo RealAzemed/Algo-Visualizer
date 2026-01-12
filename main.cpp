@@ -30,16 +30,16 @@ void BubbleSort(Bars array[], int length) {
 }
 int main()
 {
-	float screen_width = 1330;
-	float screen_height = 720;
+	float screen_width = 1600;
+	float screen_height = 900;
 
     InitWindow(screen_width, screen_height, "Algorithm Visualizer");
-
-	Bars bars[75];
+	int size = 400;
+	Bars bars[size];
 	SetTargetFPS(180);
 
 	for(auto &bar : bars){
-		bar.height = GetRandomValue(10,600);
+		bar.height = GetRandomValue(10,750);
 		bar.color = RED;
 	}
 
@@ -50,17 +50,17 @@ int main()
 
     while (!WindowShouldClose())
     {
-		BubbleSort(bars, 75);
+		BubbleSort(bars, size);
         BeginDrawing();
             ClearBackground(BLACK);
 			float i = 0;
 			for(const auto &bar : bars)
 			{
 
-				Rectangle rec = {i, screen_height - bar.height, 15, bar.height};
+				Rectangle rec = {i, screen_height - bar.height, screen_width/size, bar.height};
 				DrawRectangleRec(rec, RED);
 				DrawRectangleLinesEx(rec, 3 , RAYWHITE);
-				i += 13;
+				i += screen_width/size;
 			}
 
         EndDrawing();
