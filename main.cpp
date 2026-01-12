@@ -1,14 +1,35 @@
+#include <iostream>
 #include "raylib.h"
 
-int main(void)
+using namespace std;
+
+struct Bars{
+	int height;
+	Color color;
+};
+
+
+int main()
 {
-    InitWindow(800, 450, "raylib [core] example - basic window");
+    InitWindow(1280, 720, "Algorithm Visualizer");
+
+	Bars bars[100];
+	SetTargetFPS(180);
+
+	for(auto &bar : bars){
+		bar.height = GetRandomValue(10,600);
+	}
+
+	for (auto bar : bars){
+		cout << bar.height << endl;
+	}
+
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
-            ClearBackground(RAYWHITE);
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+            ClearBackground(BLACK);
+            DrawText("first commit", 190, 200, 20, RED);
         EndDrawing();
     }
 
