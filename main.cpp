@@ -36,7 +36,7 @@ int main()
     InitWindow(screen_width, screen_height, "Algorithm Visualizer");
 
 	Bars bars[75];
-	SetTargetFPS(60);
+	SetTargetFPS(180);
 
 	for(auto &bar : bars){
 		bar.height = GetRandomValue(10,600);
