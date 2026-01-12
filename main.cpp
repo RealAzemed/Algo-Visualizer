@@ -4,20 +4,43 @@
 using namespace std;
 
 struct Bars{
-	int height;
+	float height;
 	Color color;
 };
 
+void BubbleSort(Bars array[], int length) {
 
+	//used static variables so it can remember em
+    static int i = 0;
+    static int j = 0;
+
+    if (i >= length - 1) return;
+
+    if (array[j].height > array[j + 1].height) {
+        Bars temp = array[j];
+        array[j] = array[j+1];
+        array[j+1] = temp;
+    }
+
+    j++;
+    if (j >= length - i - 1) {
+        j = 0;
+        i++;
+    }
+}
 int main()
 {
-    InitWindow(1280, 720, "Algorithm Visualizer");
+	float screen_width = 1330;
+	float screen_height = 720;
 
-	Bars bars[100];
-	SetTargetFPS(180);
+    InitWindow(screen_width, screen_height, "Algorithm Visualizer");
+
+	Bars bars[75];
+	SetTargetFPS(60);
 
 	for(auto &bar : bars){
 		bar.height = GetRandomValue(10,600);
+		bar.color = RED;
 	}
 
 	for (auto bar : bars){
@@ -27,9 +50,19 @@ int main()
 
     while (!WindowShouldClose())
     {
+		BubbleSort(bars, 75);
         BeginDrawing();
             ClearBackground(BLACK);
-            DrawText("first commit", 190, 200, 20, RED);
+			float i = 0;
+			for(const auto &bar : bars)
+			{
+
+				Rectangle rec = {i, screen_height - bar.height, 15, bar.height};
+				DrawRectangleRec(rec, RED);
+				DrawRectangleLinesEx(rec, 3 , RAYWHITE);
+				i += 13;
+			}
+
         EndDrawing();
     }
 
